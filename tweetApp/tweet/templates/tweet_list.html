@@ -1,0 +1,72 @@
+{% extends "layout_base.html" %}
+
+{% block title %}
+Social Media App
+{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'tweet_create' %}" class="bg-green-800 text-white font-semibold px-5 py-2 rounded-full 
+hover:bg-green-500 hover:shadow-lg 
+focus:outline-none focus:ring-2 focus:ring-green-400 
+transition duration-300 m-8 inline-block">
+  Create tweet
+</a>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ml-20 mr-20 mb-10">
+  {% for tweet in tweets %}
+  <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden text-white flex flex-col h-full ">
+    
+    {% if tweet.photo %}
+      <!-- Card with Image -->
+      <img 
+        src="{{ tweet.photo.url }}" 
+        alt="Card Image" 
+        class="w-full h-32 object-cover"
+      />
+      <div class="p-3 flex flex-col justify-between flex-grow">
+        <h1 class="text-lg font-bold text-indigo-400 mb-1">{{tweet.user.username}}</h1>
+        <p class="text-gray-300 text-xs mb-3 ">
+          {{tweet.text}}
+        </p>
+        {% if tweet.user == user %}
+        <div class="flex space-x-2 mt-auto">
+          <a href="{% url 'tweet_edit' tweet.id %}" 
+             class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-3 py-1 rounded-full transition duration-300">
+            Edit
+          </a>
+          <a href="{% url 'tweet_delete' tweet.id %}" 
+             class="bg-red-600 hover:bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full transition duration-300">
+            Delete
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    
+    {% else %}
+      <!-- Card without Image -->
+      <div class="p-4 flex flex-col justify-between flex-grow bg-gradient-to-br from-gray-800 to-gray-700">
+        <h1 class="text-lg font-bold text-indigo-400 mb-2">{{tweet.user.username}}</h1>
+        <p class="text-gray-300 text-xs mb-3 ">
+          {{tweet.text}}
+        </p>
+        {% if tweet.user == user %}
+        <div class="flex space-x-2 mt-auto">
+          <a href="{% url 'tweet_edit' tweet.id %}" 
+             class="bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-3 py-1 rounded-full transition duration-300">
+            Edit
+          </a>
+          <a href="{% url 'tweet_delete' tweet.id %}" 
+             class="bg-red-600 hover:bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full transition duration-300">
+            Delete
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

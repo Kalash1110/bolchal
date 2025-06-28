@@ -1,0 +1,42 @@
+{% extends "layout_base.html" %}
+
+{% block title %}
+Social Media App
+{% endblock %}
+
+{% block content %}
+
+<div class="flex justify-center items-center min-h-screen bg-gray-700">
+  <div class="bg-gray-900 rounded-xl shadow-lg p-8 w-full max-w-lg">
+
+    <h2 class="text-3xl text-indigo-400 font-bold text-center mb-8">
+      {% if form.instance.pk %}
+        Edit Tweet
+      {% else %}
+        Create Tweet
+      {% endif %}
+    </h2>
+
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+      {% csrf_token %}
+
+      {% for field in form %}
+        <div>
+          <label for="{{ field.id_for_label }}" class="block text-white font-semibold mb-2">
+            {{ field.label }}
+          </label>
+          {{ field }}
+        
+        </div>
+      {% endfor %}
+
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-5 py-3 rounded-full transition duration-300">
+        Submit
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}

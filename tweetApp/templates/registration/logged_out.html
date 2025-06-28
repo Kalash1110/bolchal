@@ -1,0 +1,27 @@
+{% extends "layout_base.html" %}
+{% load form_tags %}
+{% block content %}
+<h2>Logout Page</h2>
+
+<p>You have been logged out <a href="{% url 'login' %}">Click here to login again</a></p>
+{% endblock %}
+{% comment %} {% extends "layout_base.html" %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-800">
+  <div class="bg-gray-900 p-8 rounded-xl shadow-lg max-w-md w-full text-white text-center">
+    
+    <h2 class="text-3xl font-bold text-indigo-400 mb-8">
+      Logged Out
+    </h2>
+
+    <p class="mb-6">You have been logged out.</p>
+
+    <a href="{% url 'login' %}" 
+       class="inline-block w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-5 py-3 rounded-full transition duration-300">
+      Click here to login again
+    </a>
+
+  </div>
+</div>
+{% endblock %} {% endcomment %}

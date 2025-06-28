@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)xm1ke%%&4%3mb_qylc)^cr67w9nw2f_no^$e2opuyf29yf4f2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['your-app-name.onrender.com']
+ALLOWED_HOSTS = ['bolchal.onrender.com']
 
 
 # Application definition
@@ -123,6 +123,8 @@ NPM_BIN_PATH= '/home/kalash/.nvm/versions/node/v22.15.0/bin/npm'
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

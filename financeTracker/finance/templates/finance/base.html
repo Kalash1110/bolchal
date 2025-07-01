@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}{% endblock %}</title>
+   
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+
+    <nav class="bg-indigo-100 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+          
+          <!-- Brand -->
+          <div class="text-xl font-bold text-indigo-700">
+          Finance Tracker
+          </div>
+
+          <div id="messages-container" class="flex items-center">
+            {% if messages %}
+              {% for message in messages %}
+                <div
+                  class="ml-4 px-4 py-2 rounded 
+                         {% if message.tags == 'success' %}bg-green-600{% elif message.tags == 'error' %}bg-red-600{% else %}bg-gray-600{% endif %}
+                         text-white transition-opacity duration-500"
+                  id="message-box"
+                >
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+          
+          <!-- Links -->
+           
+          <div class="flex items-center gap-4">
+            {% if not user.is_authenticated %}
+            <a href="{% url 'login' %}" 
+               class="text-indigo-700 hover:text-indigo-900 font-medium transition">
+              Login
+            </a>
+            <a href="{% url 'registerView' %}" 
+               class="text-green-700 hover:text-green-900 font-medium transition">
+              Register
+            </a>
+            {% endif %}
+
+            {% comment %} After logout we are redirected to login page as specified in the settings.py {% endcomment %}
+            {% if user.is_authenticated %}
+
+            <a href="{% url 'dashboardView' %}" 
+            class="text-blue-700 hover:text-blue-900 font-medium transition">
+           Dashboard
+         </a>
+
+            <a href="{% url 'addTransaction' %}" 
+            class="text-green-700 hover:text-green-900 font-medium transition">
+           Add Transaction
+         </a>
+
+         <a href="{% url 'transactionList' %}" 
+         class="text-green-700 hover:text-green-900 font-medium transition">
+       Transaction List
+      </a>
+
+
+      <a href="{% url 'goalView' %}" 
+      class="text-blue-700 hover:text-blue-900 font-medium transition">
+     Set Goals
+   </a>
+         
+            <form method="post" action="{% url 'logout' %}" >
+                {% csrf_token %}
+                <button type='submit' 
+                        class=" text-red-800 hover:text-red-500 font-medium transition ">
+                  Logout
+                </button>
+              </form>
+       
+            
+              {% endif %}
+
+          </div>
+
+          
+          
+        </div>
+
+
+
+     
+      </nav>
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const messageBox = document.getElementById("message-box");
+          if (messageBox) {
+            setTimeout(() => {
+              messageBox.classList.add("opacity-0");
+            }, 3000);
+          }
+        });
+      </script>
+      
+      
+    {% block content %}{% endblock %}
+</body>
+</html>

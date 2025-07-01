@@ -1,0 +1,99 @@
+{% extends "./base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 flex items-center justify-center">
+  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">
+      Create Account
+    </h2>
+    
+    <form method="post">
+      {% csrf_token %}
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-2" for="username">
+          Username
+        </label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username"
+          class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Your username"
+        />
+        {% if form.username.errors %}
+          <p class="text-red-500 text-sm mt-1">{{ form.username.errors.0 }}</p>
+        {% endif %}
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 font-semibold mb-2" for="email">
+          Email
+        </label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email"
+          class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="you@example.com"
+        />
+        {% if form.email.errors %}
+          <p class="text-red-500 text-sm mt-1">{{ form.email.errors.0 }}</p>
+        {% endif %}
+      </div>
+      
+      <div class="mb-6">
+        <label class="block text-gray-700 font-semibold mb-2" for="password1">
+          Password
+        </label>
+        <input 
+          type="password" 
+          id="password1" 
+          name="password1"
+          class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Your password"
+        />
+        {% if form.password1.errors %}
+          <p class="text-red-500 text-sm mt-1">{{ form.password1.errors.0 }}</p>
+        {% endif %}
+      </div>
+      
+      <div class="mb-6">
+        <label class="block text-gray-700 font-semibold mb-2" for="password2">
+          Confirm Password
+        </label>
+        <input 
+          type="password" 
+          id="password2" 
+          name="password2"
+          class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Confirm your password"
+        />
+        {% if form.password2.errors %}
+          <p class="text-red-500 text-sm mt-1">{{ form.password2.errors.0 }}</p>
+        {% endif %}
+      </div>
+      
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded transition duration-300"
+      >
+        Register
+      </button>
+    </form>
+    
+    <!-- NEW login link section -->
+    <div class="mt-6 text-center">
+      <p class="text-sm text-gray-600">
+        Already have an account?
+        <a href="{% url 'login' %}" class="text-indigo-600 hover:text-indigo-800 font-semibold transition">
+          Login here
+        </a>
+      </p>
+    </div>
+    
+  </div>
+</div>
+{% endblock %}
